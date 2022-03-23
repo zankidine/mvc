@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2022-03-23 14:52:25
+/* Smarty version 3.1.34-dev-7, created on 2022-03-23 15:23:36
   from 'C:\laragon\www\mvc\mod_commande\vue\commandeListeVue.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_623b34292b8715_89423729',
+  'unifunc' => 'content_623b3b78be5650_52344897',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2906d4cc29b41a7cb2a46de764cf2c4e953c2f73' => 
     array (
       0 => 'C:\\laragon\\www\\mvc\\mod_commande\\vue\\commandeListeVue.tpl',
-      1 => 1648047141,
+      1 => 1648049012,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:public/header.tpl' => 1,
   ),
 ),false)) {
-function content_623b34292b8715_89423729 (Smarty_Internal_Template $_smarty_tpl) {
+function content_623b3b78be5650_52344897 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -165,7 +165,7 @@ $_smarty_tpl->tpl_vars['commande']->do_else = false;
                                             <form method="post" action="index.php">
                                                 <input type="hidden" name="gestion" value="commande">
                                                 <input type="hidden" name="action" value="form_consulter">
-                                                <input type="hidden" name="reference" value="<?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
+                                                <input type="hidden" name="numero" value="<?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
 ">
                                                 <input type="image"
                                                        src="public/images/icones/m16.png"
@@ -176,7 +176,7 @@ $_smarty_tpl->tpl_vars['commande']->do_else = false;
                                             <form method="post" action="index.php">
                                                 <input type="hidden" name="gestion" value="commande">
                                                 <input type="hidden" name="action" value="form_modifier">
-                                                <input type="hidden" name="reference" value="<?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
+                                                <input type="hidden" name="numero" value="<?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
 ">
                                                 <input type="image"
                                                        src="public/images/icones/p16.png"

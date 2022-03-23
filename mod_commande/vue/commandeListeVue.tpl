@@ -128,7 +128,7 @@
                                             <form method="post" action="index.php">
                                                 <input type="hidden" name="gestion" value="commande">
                                                 <input type="hidden" name="action" value="form_consulter">
-                                                <input type="hidden" name="reference" value="{$commande->getNumero()}">
+                                                <input type="hidden" name="numero" value="{$commande->getNumero()}">
                                                 <input type="image"
                                                        src="public/images/icones/m16.png"
                                                        name="btn_consulter">
@@ -138,7 +138,7 @@
                                             <form method="post" action="index.php">
                                                 <input type="hidden" name="gestion" value="commande">
                                                 <input type="hidden" name="action" value="form_modifier">
-                                                <input type="hidden" name="reference" value="{$commande->getNumero()}">
+                                                <input type="hidden" name="numero" value="{$commande->getNumero()}">
                                                 <input type="image"
                                                        src="public/images/icones/p16.png"
                                                        name="btn_modifier">
