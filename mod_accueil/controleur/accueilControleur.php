@@ -1,0 +1,22 @@
+<?php
+/**
+ * Classe AccueilControleur
+ */
+class AccueilControleur{
+
+    private $parametre = [];
+    // Ultérieurement un objet $oModele sera nécessaire
+    private $oVue; // Objet
+
+    public function __construct($parametre){
+
+        $this->parametre = $parametre;
+//        require_once 'mod_accueil/vue/accueilVue.php';
+        $this->oVue = new AccueilVue($this->parametre);
+    }
+
+    public function lister(){
+
+        $this->oVue->genererAffichage();
+    }
+}
