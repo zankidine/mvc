@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2022-03-23 16:00:10
+/* Smarty version 3.1.34-dev-7, created on 2022-03-24 16:11:37
   from 'C:\laragon\www\mvc\mod_commande\vue\commandeFicheVue.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_623b440aed6211_24958049',
+  'unifunc' => 'content_623c983972f3c7_75327003',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5de8dd936832b233b08fa66b1f31fa8c361babb5' => 
     array (
       0 => 'C:\\laragon\\www\\mvc\\mod_commande\\vue\\commandeFicheVue.tpl',
-      1 => 1648051208,
+      1 => 1648138290,
       2 => 'file',
     ),
   ),
@@ -22,8 +22,10 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:public/header.tpl' => 1,
   ),
 ),false)) {
-function content_623b440aed6211_24958049 (Smarty_Internal_Template $_smarty_tpl) {
-?><!doctype html>
+function content_623c983972f3c7_75327003 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\laragon\\www\\mvc\\include\\libs\\plugins\\modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
+?>
+<!doctype html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>
@@ -117,20 +119,26 @@ function content_623b440aed6211_24958049 (Smarty_Internal_Template $_smarty_tpl)
                         <div class=" col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title mb-3">Fiche Commande  : Enregistrement</strong>
+                                    <strong class="card-title mb-3"><?php echo $_smarty_tpl->tpl_vars['titrePage']->value;?>
+</strong>
                                 </div>
                                 <div class="card-body">
                                     <form action="" method="post" class="form-horizontal">
                                         <div class="row form-group">
-                                            <div class="col col-sm-5"><label for="input-small" class=" form-control-label">Date de la commande</label></div>
-                                            <div class="col col-sm-6"><input type="date" id="input-small" name="input-small" placeholder="" class="input-sm form-control-sm form-control"></div>
+                                            <div class="col col-sm-5"><label for="input-small" class=" form-control-label" >Date de la commande</label></div>
+                                            <div class="col col-sm-6"><input type="date" id="input-small" name="input-small" <?php echo $_smarty_tpl->tpl_vars['readonly']->value;?>
+ value="<?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['uneCommande']->value->getDate_Commande(),"%Y-%m-%d");?>
+" class="input-sm form-control-sm form-control"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Client</label></div>
                                             <div class="col col-sm-6">
-                                                <select name="client" id="client"  class="form-control">
+                                                <select name="client" id="client" <?php echo $_smarty_tpl->tpl_vars['readonly']->value;?>
+ class="form-control">
                                                     <option value="0">Please select</option>
-                                                    <option value="1">Option #1</option>
+                                                    <option value="1" <?php echo $_smarty_tpl->tpl_vars['selected']->value;?>
+><?php echo $_smarty_tpl->tpl_vars['uneCommande']->value->getClient();?>
+</option>
                                                     <option value="2">Option #2</option>
                                                     <option value="3">Option #3</option>
                                                 </select>
@@ -154,17 +162,21 @@ function content_623b440aed6211_24958049 (Smarty_Internal_Template $_smarty_tpl)
                                     <form action="" method="post" class="form-horizontal">
                                         <div class="row form-group">
                                             <div class="col col-sm-5"><label for="input-small" class=" form-control-label">Date de livraison</label></div>
-                                            <div class="col col-sm-6"><input type="date" id="input-small" name="input-small" placeholder="" class="input-sm form-control-sm form-control"></div>
+                                            <div class="col col-sm-6"><input type="date" id="input-small" name="input-small" <?php echo $_smarty_tpl->tpl_vars['readonly']->value;?>
+ value="<?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['uneCommande']->value->getDate_Livraison(),"%Y-%m-%d");?>
+" class="input-sm form-control-sm form-control"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Total HT (en €)</label></div>
                                             <div class="col col-sm-6">
-                                                <input type="text" id="input-small" name="input-small" placeholder="124.44" readonly class="input-sm form-control-sm form-control">
+                                                <input type="text" id="input-small" name="input-small" placeholder="<?php echo $_smarty_tpl->tpl_vars['uneCommande']->value->getTotal_HT();?>
+" readonly class="input-sm form-control-sm form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-sm-5"><label for="input-large" class=" form-control-label">TVA (en €)</label></div>
-                                            <div class="col col-sm-6"><input type="text" id="input-small" name="input-small" readonly placeholder="24.89" class="input-sm form-control-sm form-control"></div>
+                                            <div class="col col-sm-6"><input type="text" id="input-small" name="input-small" readonly placeholder="<?php echo $_smarty_tpl->tpl_vars['uneCommande']->value->getTotal_Tva();?>
+" class="input-sm form-control-sm form-control"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -206,27 +218,42 @@ function content_623b440aed6211_24958049 (Smarty_Internal_Template $_smarty_tpl)
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1007</td>
-                                    <td><a href="#">Tendre de fruit</a> </td>
-                                    <td>
-                                        <input type="number" value="3">
-                                    </td>
-                                    <td>24.48</td>
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['uneCommande']->value->getListeLigneCommande(), 'ligne', false, 'index');
+$_smarty_tpl->tpl_vars['ligne']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['index']->value => $_smarty_tpl->tpl_vars['ligne']->value) {
+$_smarty_tpl->tpl_vars['ligne']->do_else = false;
+?>
+                                    <tr>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['ligne']->value['numero_ligne'];?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['ligne']->value['reference'];?>
+</td>
+                                        <td><a href="#"><?php echo $_smarty_tpl->tpl_vars['ligne']->value['designation'];?>
+</a> </td>
+                                        <td>
+                                            <input type="number" <?php echo $_smarty_tpl->tpl_vars['readonly']->value;?>
+ value="<?php echo $_smarty_tpl->tpl_vars['ligne']->value['quantite_demandee'];?>
+">
+                                        </td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['ligne']->value['prix_unitaire_HT'];?>
+</td>
 
-                                    <td class="pos-actions">
-                                        <form method="post" action="index.php">
-                                            <input type="hidden" name="gestion" value="commande">
-                                            <input type="hidden" name="action" value="form_modifier">
-                                            <input type="hidden" name="numero" value="">
-                                            <input type="image"
-                                                   src="public/images/icones/p16.png"
-                                                   name="btn_modifier">
-                                        </form>
-                                    </td>
+                                        <td class="pos-actions">
+                                            <form method="post" action="index.php">
+                                                <input type="hidden" name="gestion" value="commande">
+                                                <input type="hidden" name="action" value="form_modifier">
+                                                <input type="hidden" name="numero" value="">
+                                                <input type="image"
+                                                       src="public/images/icones/p16.png"
+                                                       name="btn_modifier">
+                                            </form>
+                                        </td>
 
-                                </tr>
+                                    </tr>
+                                <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                 </tbody>
                             </table>
                         </div>

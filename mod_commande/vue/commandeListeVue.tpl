@@ -139,9 +139,13 @@
                                                 <input type="hidden" name="gestion" value="commande">
                                                 <input type="hidden" name="action" value="form_modifier">
                                                 <input type="hidden" name="numero" value="{$commande->getNumero()}">
-                                                <input type="image"
-                                                       src="public/images/icones/p16.png"
-                                                       name="btn_modifier">
+                                                {if $commande->getFinaliser() eq 1}
+                                                    <p>Validée</p>
+                                                {else}
+                                                    <input type="image"
+                                                           src="public/images/icones/p16.png"
+                                                           name="btn_modifier">
+                                                {/if}
                                             </form>
                                         </td>
                                     </tr>

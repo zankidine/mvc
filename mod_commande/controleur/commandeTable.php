@@ -11,6 +11,41 @@ class CommandeTable
     private $total_tva;
     private $vendeur;
     private $client;
+    private $finaliser;
+    private $listeLigneCommande = [];
+
+    /**
+     * @return mixed
+     */
+    public function getFinaliser()
+    {
+        return $this->finaliser;
+    }
+
+    /**
+     * @param mixed $finaliser
+     */
+    public function setFinaliser($finaliser)
+    {
+        $this->finaliser = $finaliser;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getListeLigneCommande()
+    {
+        return $this->listeLigneCommande;
+    }
+
+    /**
+     * @param array $listeLigneCommande
+     */
+    public function setListeLigneCommande($listeLigneCommande)
+    {
+        $this->listeLigneCommande = $listeLigneCommande;
+    }
 
     /**
      * @return mixed
@@ -120,7 +155,7 @@ class CommandeTable
     /**
      * @return mixed
      */
-    public function getDateLivraison()
+    public function getDate_Livraison()
     {
         return $this->date_livraison;
     }
@@ -128,7 +163,7 @@ class CommandeTable
     /**
      * @param mixed $date_livraison
      */
-    public function setDateLivraison($date_livraison)
+    public function setDate_Livraison($date_livraison)
     {
         $this->date_livraison = $date_livraison;
     }
@@ -136,7 +171,7 @@ class CommandeTable
     /**
      * @return mixed
      */
-    public function getDateCommande()
+    public function getDate_Commande()
     {
         return $this->date_commande;
     }
@@ -144,7 +179,7 @@ class CommandeTable
     /**
      * @param mixed $date_commande
      */
-    public function setDateCommande($date_commande)
+    public function setDate_Commande($date_commande)
     {
         $this->date_commande = $date_commande;
     }
@@ -168,7 +203,7 @@ class CommandeTable
     /**
      * @return mixed
      */
-    public function getTotalTva()
+    public function getTotal_Tva()
     {
         return $this->total_tva;
     }
@@ -176,7 +211,7 @@ class CommandeTable
     /**
      * @param mixed $total_tva
      */
-    public function setTotalTva($total_tva)
+    public function setTotal_Tva($total_tva)
     {
         $this->total_tva = $total_tva;
     }

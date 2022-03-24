@@ -90,20 +90,20 @@
                         <div class=" col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title mb-3">Fiche Commande  : Enregistrement</strong>
+                                    <strong class="card-title mb-3">{$titrePage}</strong>
                                 </div>
                                 <div class="card-body">
                                     <form action="" method="post" class="form-horizontal">
                                         <div class="row form-group">
-                                            <div class="col col-sm-5"><label for="input-small" class=" form-control-label">Date de la commande</label></div>
-                                            <div class="col col-sm-6"><input type="date" id="input-small" name="input-small" placeholder="" class="input-sm form-control-sm form-control"></div>
+                                            <div class="col col-sm-5"><label for="input-small" class=" form-control-label" >Date de la commande</label></div>
+                                            <div class="col col-sm-6"><input type="date" id="input-small" name="input-small" {$readonly} value="{$uneCommande->getDate_Commande()|date_format: "%Y-%m-%d"}" class="input-sm form-control-sm form-control"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Client</label></div>
                                             <div class="col col-sm-6">
-                                                <select name="client" id="client"  class="form-control">
+                                                <select name="client" id="client" {$readonly} class="form-control">
                                                     <option value="0">Please select</option>
-                                                    <option value="1">Option #1</option>
+                                                    <option value="1" {$selected}>{$uneCommande->getClient()}</option>
                                                     <option value="2">Option #2</option>
                                                     <option value="3">Option #3</option>
                                                 </select>
@@ -127,17 +127,17 @@
                                     <form action="" method="post" class="form-horizontal">
                                         <div class="row form-group">
                                             <div class="col col-sm-5"><label for="input-small" class=" form-control-label">Date de livraison</label></div>
-                                            <div class="col col-sm-6"><input type="date" id="input-small" name="input-small" placeholder="" class="input-sm form-control-sm form-control"></div>
+                                            <div class="col col-sm-6"><input type="date" id="input-small" name="input-small" {$readonly} value="{$uneCommande->getDate_Livraison()|date_format: "%Y-%m-%d"}" class="input-sm form-control-sm form-control"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Total HT (en €)</label></div>
                                             <div class="col col-sm-6">
-                                                <input type="text" id="input-small" name="input-small" placeholder="124.44" readonly class="input-sm form-control-sm form-control">
+                                                <input type="text" id="input-small" name="input-small" placeholder="{$uneCommande->getTotal_HT()}" readonly class="input-sm form-control-sm form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-sm-5"><label for="input-large" class=" form-control-label">TVA (en €)</label></div>
-                                            <div class="col col-sm-6"><input type="text" id="input-small" name="input-small" readonly placeholder="24.89" class="input-sm form-control-sm form-control"></div>
+                                            <div class="col col-sm-6"><input type="text" id="input-small" name="input-small" readonly placeholder="{$uneCommande->getTotal_Tva()}" class="input-sm form-control-sm form-control"></div>
                                         </div>
                                     </form>
                                 </div>
@@ -178,61 +178,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1007</td>
-                                    <td><a href="#">Tendre de fruit</a> </td>
-                                    <td>
-                                        <input type="number" value="3">
-                                    </td>
-                                    <td>24.48</td>
+                                {foreach from=$uneCommande->getListeLigneCommande() key=index item=ligne}
+                                    <tr>
+                                        <td>{$ligne.numero_ligne}</td>
+                                        <td>{$ligne.reference}</td>
+                                        <td><a href="#">{$ligne.designation}</a> </td>
+                                        <td>
+                                            <input type="number" {$readonly} value="{$ligne.quantite_demandee}">
+                                        </td>
+                                        <td>{$ligne.prix_unitaire_HT}</td>
 
-                                    <td class="pos-actions">
-                                        <form method="post" action="index.php">
-                                            <input type="hidden" name="gestion" value="commande">
-                                            <input type="hidden" name="action" value="form_modifier">
-                                            <input type="hidden" name="numero" value="">
-                                            <input type="image"
-                                                   src="public/images/icones/p16.png"
-                                                   name="btn_modifier">
-                                        </form>
-                                    </td>
+                                        <td class="pos-actions">
+                                            <form method="post" action="index.php">
+                                                <input type="hidden" name="gestion" value="commande">
+                                                <input type="hidden" name="action" value="form_modifier">
+                                                <input type="hidden" name="numero" value="">
+                                                <input type="image"
+                                                       src="public/images/icones/p16.png"
+                                                       name="btn_modifier">
+                                            </form>
+                                        </td>
 
-                                </tr>
-{*                                {foreach from=$listeCommandes item=commande}*}
-{*                                    <tr>*}
-{*                                        <td>{$commande->getNumero()}</td>*}
-{*                                        <td>{$commande->getVendeur()}</td>*}
-{*                                        <td>{$commande->getClient()}</td>*}
-{*                                        <td>{$commande->getTotal_Ht()}</td>*}
-{*                                        <td class="pos-actions">*}
-{*                                            <form method="post" action="index.php">*}
-{*                                                <input type="hidden" name="gestion" value="commande">*}
-{*                                                <input type="hidden" name="action" value="form_consulter">*}
-{*                                                <input type="hidden" name="numero" value="{$commande->getNumero()}">*}
-{*                                                <input type="image"*}
-{*                                                       src="public/images/icones/m16.png"*}
-{*                                                       name="btn_consulter">*}
-{*                                            </form>*}
-{*                                        </td>*}
-{*                                        <td class="pos-actions">*}
-{*                                            <form method="post" action="index.php">*}
-{*                                                <input type="hidden" name="gestion" value="commande">*}
-{*                                                <input type="hidden" name="action" value="form_modifier">*}
-{*                                                <input type="hidden" name="numero" value="{$commande->getNumero()}">*}
-{*                                                <input type="image"*}
-{*                                                       src="public/images/icones/p16.png"*}
-{*                                                       name="btn_modifier">*}
-{*                                            </form>*}
-{*                                        </td>*}
-{*                                    </tr>*}
-{*                                    {foreachelse}*}
-{*                                    <tr>*}
-{*                                        <td colspan="7">*}
-{*                                            Aucun enregistrement trouvé*}
-{*                                        </td>*}
-{*                                    </tr>*}
-{*                                {/foreach}*}
+                                    </tr>
+                                {/foreach}
                                 </tbody>
                             </table>
                         </div>

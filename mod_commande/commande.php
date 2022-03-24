@@ -11,6 +11,9 @@ class Commande
         $this->oControleur = new CommandeControleur($this->parametre);
     }
 
+    /**
+     * @return void
+     */
     public function choixAction()
     {
 

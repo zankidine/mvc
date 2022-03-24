@@ -1,6 +1,5 @@
 <?php
 const NOM = 'root';
 const PW = '';
-const BD = 'gourmandise_mvc';
+const BD = 'gourmandise';
 const SRV = 'localhost';
-

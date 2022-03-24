@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2022-03-23 15:23:36
+/* Smarty version 3.1.34-dev-7, created on 2022-03-24 16:34:34
   from 'C:\laragon\www\mvc\mod_commande\vue\commandeListeVue.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_623b3b78be5650_52344897',
+  'unifunc' => 'content_623c9d9a6fb0b2_39060661',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2906d4cc29b41a7cb2a46de764cf2c4e953c2f73' => 
     array (
       0 => 'C:\\laragon\\www\\mvc\\mod_commande\\vue\\commandeListeVue.tpl',
-      1 => 1648049012,
+      1 => 1648139660,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:public/header.tpl' => 1,
   ),
 ),false)) {
-function content_623b3b78be5650_52344897 (Smarty_Internal_Template $_smarty_tpl) {
+function content_623c9d9a6fb0b2_39060661 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -178,9 +178,13 @@ $_smarty_tpl->tpl_vars['commande']->do_else = false;
                                                 <input type="hidden" name="action" value="form_modifier">
                                                 <input type="hidden" name="numero" value="<?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
 ">
-                                                <input type="image"
-                                                       src="public/images/icones/p16.png"
-                                                       name="btn_modifier">
+                                                <?php if ($_smarty_tpl->tpl_vars['commande']->value->getFinaliser() == 1) {?>
+                                                    <p>Validée</p>
+                                                <?php } else { ?>
+                                                    <input type="image"
+                                                           src="public/images/icones/p16.png"
+                                                           name="btn_modifier">
+                                                <?php }?>
                                             </form>
                                         </td>
                                     </tr>

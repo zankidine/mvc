@@ -12,7 +12,7 @@ class CommandeModele extends Modele
     public function getListeCommande()
     {
         //$sql = "SELECT * FROM commande ";
-        $sql = "SELECT numero, commande.codev,commande.codec, date_livraison, date_commande, total_ht, total_tva, etat, client.nom 'client', vendeur.nom 'vendeur' FROM commande INNER JOIN client ON commande.codec = client.codec INNER JOIN vendeur ON vendeur.codev = commande.codev";
+        $sql = "SELECT numero, commande.codev,commande.codec, date_livraison, date_commande, total_ht, total_tva, etat, client.nom 'client', vendeur.nom 'vendeur', finaliser FROM commande INNER JOIN client ON commande.codec = client.codec INNER JOIN vendeur ON vendeur.codev = commande.codev";
 
         $idRequete = $this->executeRequete($sql);
 
@@ -29,6 +29,15 @@ class CommandeModele extends Modele
 
             return null;
         }
+    }
+
+    public function getLignesCommande()
+    {
+        $sql = "SELECT numero_ligne,ligne_commande.reference, designation,prix_unitaire_HT, quantite_demandee 
+                FROM ligne_commande INNER JOIN produit ON produit.reference = ligne_commande.reference 
+                WHERE numero = ?";
+        $idRequete = $this->executeRequete($sql, array($this->parametre['numero']));
+        return $idRequete->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getUneCommande()

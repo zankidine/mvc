@@ -35,6 +35,7 @@ class CommandeVue
 
             case 'form_consulter':
                 $this->tpl->assign('action', 'consulter');
+                $this->tpl->assign('selected', 'selected');
                 $this->tpl->assign('titrePage', 'Fiche Commande : Consultation');
                 $this->tpl->assign('readonly', 'disabled');
                 $this->tpl->assign('uneCommande', $valeurs);
@@ -57,7 +58,7 @@ class CommandeVue
         $this->tpl->display('mod_commande/vue/commandeFicheVue.tpl');
     }
 
-    public function genererAffichageListeArchive($listeProduit)
-    {
-    }
+//    public function genererAffichageListeArchive($listeProduit)
+//    {
+//    }
 }
