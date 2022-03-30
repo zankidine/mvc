@@ -76,9 +76,9 @@
         </div>
     </div>
 {*    MESSAGE RETOUR ERREUR *}
-{*    <div {if ClientTable::getMessageErreur() neq '' } class="alert alert-danger" {/if} >*}
-{*        {ClientTable::getMessageErreur()}*}
-{*    </div>*}
+    <div {if ProduitTable::getMessageErreur() neq '' } class="alert alert-danger" {/if} >
+        {ProduitTable::getMessageErreur()}
+    </div>
 
     <div class="content mt-3">
         <div class="animated fadeIn">
@@ -168,7 +168,7 @@
                                         <div class="stat-widget-one">
                                             <div class="stat-content dib">
                                                 <div class="stat-text">Prix au Kilogramme</div>
-                                                <div class="stat-digit">36 €</div>
+                                                <div class="stat-digit">{if $unProduit->getDescriptif() eq 'G'}{$unProduit->getPrix_Unitaire_HT()/($unProduit->getQuantite()/1000)}{elseif $unProduit->getDescriptif() eq 'P'}{$unProduit->getPrix_Unitaire_HT()/(($unProduit->getPoids_Piece() * $unProduit->getQuantite())/1000)}{/if}€</div>
                                             </div>
                                         </div>
                                     </div>
@@ -180,7 +180,7 @@
                                         <div class="stat-widget-one">
                                             <div class="stat-content dib">
                                                 <div class="stat-text mb-1">Classement</div>
-                                                <div class="stat-text">L'article DESIGNATION est classé en 1ère position parmis les meilleurs ventes.</div>
+                                                <div class="stat-text">L'article {$unProduit->getDesignation()} est classé en {$unProduit->getPosition()} {if $unProduit->getPosition() > 1}éme {else} ére{/if} position parmis les meilleurs ventes.</div>
                                             </div>
                                         </div>
                                     </div>

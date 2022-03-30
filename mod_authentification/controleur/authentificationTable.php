@@ -6,6 +6,23 @@ class AuthentificationTable
     private $login = "";
     private $motdepasse = "";
     private $autorisationSession = true;
+    private $codev;
+
+    /**
+     * @return mixed
+     */
+    public function getCodev()
+    {
+        return $this->codev;
+    }
+
+    /**
+     * @param mixed $codev
+     */
+    public function setCodev($codev): void
+    {
+        $this->codev = $codev;
+    }
     private static $messageErreur = "";
 
 

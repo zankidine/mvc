@@ -9,6 +9,11 @@ class VendeurModele extends Modele
         $this->parametre = $parametre;
     }
 
+    /**
+     * Procédure pour la modification des informations vendeur
+     * @param VendeurTable $Vendeur
+     * @return void
+     */
     public function updateVendeur(VendeurTable $Vendeur)
     {
 
@@ -29,11 +34,19 @@ class VendeurModele extends Modele
                 $Vendeur->getMotdepasse(),
                 $Vendeur->getCodev(),
             ]);
+            if($idRequete){
+                VendeurTable::setMessageSucces("Les modifications sont bien prises en compte. <br>");
+            }
         } else {
-            echo "Les mots de passe doivent être égale.";
+            VendeurTable::setMessageErreur("Les mots de passe doivent être égale. <br>");
+
         }
     }
 
+    /**
+     * Fonction qui retourne un objet Vendeur
+     * @return VendeurTable
+     */
     public function getUnVendeur()
     {
         $sql = 'SELECT * FROM vendeur WHERE login = ?';
@@ -43,9 +56,14 @@ class VendeurModele extends Modele
         return $unVendeur;
     }
 
+    /**
+     * Fonction qui retourne le chiffre d'affaire d'un vendeur (moins les commandes annulées)
+     * @param $unVendeur
+     * @return mixed
+     */
     public function caVendeur($unVendeur)
     {
-        $sql ="SELECT  SUM(total_ht) 'CA' FROM commande, vendeur WHERE commande.codev = ? " ;
+        $sql ="SELECT  SUM(total_ht) 'CA' FROM commande, vendeur WHERE commande.codev = ? AND commande.annuler = 0 " ;
         $idRequete = $this->executeRequete($sql,[$unVendeur->getCodev()]);
         return $idRequete->fetch(PDO::FETCH_ASSOC);
     }

@@ -65,7 +65,6 @@ class ClientModele extends Modele{
         // Requete INSERT et PREPAREE
         $sql = "INSERT INTO client (nom, adresse, cp, ville, telephone)"
             ." VALUES(?,?,?,?,?)";
-        var_dump($client);
         $idRequete = $this->executeRequete($sql,[
             $client->getNom(),
             $client->getAdresse(),
@@ -76,6 +75,8 @@ class ClientModele extends Modele{
 
         if($idRequete){
             ClientTable::setMessageSucces("Client correctement enregistré. <br>");
+        } else {
+            ClientTable::setMessageErreur("Client non enregistré.");
         }
     }
 
@@ -94,6 +95,8 @@ class ClientModele extends Modele{
 
         if($idRequete){
             ClientTable::setMessageSucces("Client correctement modifier. <br>");
+        } else {
+            ClientTable::setMessageErreur("Client n'a pas été modifier");
         }
     }
 
@@ -102,7 +105,11 @@ class ClientModele extends Modele{
         $sql = "UPDATE client SET supprimer = 1 WHERE codec= ?";
 
         $idRequete = $this->executeRequete($sql, array($this->parametre['codec']));
-
+        if($idRequete){
+            ClientTable::setMessageSucces("Client correctement supprimer. <br>");
+        } else {
+            ClientTable::setMessageErreur("Client n'a pas été supprimer");
+        }
 
     }
 
@@ -111,6 +118,11 @@ class ClientModele extends Modele{
         $sql = "UPDATE client SET supprimer = 0 WHERE codec= ?";
 
         $idRequete = $this->executeRequete($sql, array($this->parametre['codec']));
+        if($idRequete){
+            ClientTable::setMessageSucces("Client correctement activer. <br>");
+        } else {
+            ClientTable::setMessageErreur("Client n'a pas été activer");
+        }
     }
 
     public function chiffreAffaireTotal()
@@ -153,6 +165,11 @@ class ClientModele extends Modele{
         $sql = "DELETE FROM  client WHERE codec= ?";
 
         $idRequete = $this->executeRequete($sql, array($this->parametre['reference']));
+        if($idRequete){
+            ClientTable::setMessageSucces("Client correctement supprimer. <br>");
+        } else {
+            ClientTable::setMessageErreur("Client n'a pas été supprimer");
+        }
     }
 
 }

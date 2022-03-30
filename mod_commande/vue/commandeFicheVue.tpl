@@ -76,9 +76,9 @@
     </div>
 
     {*    MESSAGE RETOUR SUCCES *}
-{*    <div {if ClientTable::getMessageSucces() neq '' } class="alert alert-success" {/if} >*}
-{*        {ClientTable::getMessageSucces()}*}
-{*    </div>*}
+    <div {if CommandeTable::getMessageSucces() neq '' } class="alert alert-success" {/if} >
+        {CommandeTable::getMessageSucces()}
+    </div>
 
     <div class="content mt-3">
         <div class="animated fadeIn">
@@ -127,7 +127,27 @@
                                     <form action="" method="post" class="form-horizontal">
                                         <div class="row form-group">
                                             <div class="col col-sm-5"><label for="input-small" class=" form-control-label">Date de livraison</label></div>
-                                            <div class="col col-sm-6"><input type="date" id="input-small" name="input-small" {$readonly} value="{$uneCommande->getDate_Livraison()|date_format: "%Y-%m-%d"}" class="input-sm form-control-sm form-control"></div>
+                                            <div class="col col-sm-6">
+                                                <div class="row">
+                                                    <div class="col col-sm-11">
+                                                        <input type="date" id="input-small" name="date_livraison"
+                                                                {if $action !== 'modifier'}{$readonly}{/if}
+                                                               value="{$uneCommande->getDate_Livraison()|date_format: "%Y-%m-%d"}"
+                                                               class="input-sm form-control-sm form-control">
+                                                    </div>
+                                                    <div>
+                                                        <form method="post" action="index.php">
+                                                            <input type="hidden" name="gestion" value="commande">
+                                                            <input type="hidden" name="action" value="modifier_date">
+                                                            <input type="hidden" name="numero" value="{$uneCommande->getNumero()}">
+                                                            <input type="image"
+                                                                   src="public/images/icones/p16.png"
+                                                                   name="btn_modifier">
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-sm-5"><label for="input-normal" class=" form-control-label">Total HT (en €)</label></div>
@@ -165,7 +185,7 @@
                             </strong>
                         </div>
                         <div class="card-body">
-                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <table id="" class="table table-striped">
                             <!-- PLACER LA LISTE DES CLIENTS -->
                                 <thead>
                                 <tr>
@@ -179,31 +199,57 @@
                                 </thead>
                                 <tbody>
                                 {foreach from=$uneCommande->getListeLigneCommande() key=index item=ligne}
+                                    <form method="post" action="index.php">
+                                        <input type="hidden" name="gestion" value="commande">
+                                        <input type="hidden" name="action" value="modifier_ligne">
                                     <tr>
                                         <td>{$ligne.numero_ligne}</td>
                                         <td>{$ligne.reference}</td>
                                         <td><a href="#">{$ligne.designation}</a> </td>
                                         <td>
-                                            <input type="number" {$readonly} value="{$ligne.quantite_demandee}">
+                                            <input type="number" name="quantite" class="text-center" {if $action !== 'modifier'}{$readonly}{/if} value="{$ligne.quantite_demandee}">
                                         </td>
                                         <td>{$ligne.prix_unitaire_HT}</td>
 
                                         <td class="pos-actions">
-                                            <form method="post" action="index.php">
-                                                <input type="hidden" name="gestion" value="commande">
-                                                <input type="hidden" name="action" value="form_modifier">
-                                                <input type="hidden" name="numero" value="">
+                                                <input type="hidden" name="numero_ligne" value="{$ligne.numero_ligne}">
+                                                <input type="hidden" name="reference_produit" value="{$ligne.reference}">
+                                                <input type="hidden" name="numero_commande" value="{$uneCommande->getNumero()}">
                                                 <input type="image"
                                                        src="public/images/icones/p16.png"
                                                        name="btn_modifier">
-                                            </form>
                                         </td>
 
                                     </tr>
+                                    </form>
                                 {/foreach}
                                 </tbody>
                             </table>
                         </div>
+
+                            <div class="card-body card-block">
+                                <div class="col-md-4"> <a href="index.php?gestion=commande"><input type="button" class="btn btn-submit" value="Retour" onclick=""></a> </div>
+                                {if $action == 'modifier'}
+                                    <div class="col-md-4">
+                                        <form action="index.php" method="POST">
+                                            <input type="hidden" name="gestion" value="commande">
+                                            <input type="hidden" name="action" value="annuler">
+                                            <input type="hidden" name="f_numero" value="{$uneCommande->getNumero()}">
+                                            <input type="submit" id="f_btn-action" class="btn btn-submit pos-btn-action" value="Annuler">
+                                        </form>
+                                    </div>
+                                <div class="col-md-4 ">
+                                    <form action="index.php" method="POST">
+                                        <input type="hidden" name="gestion" value="commande">
+                                        <input type="hidden" name="action" value="finaliser">
+                                        <input type="hidden" name="f_numero" value="{$uneCommande->getNumero()}">
+                                        <input type="submit" id="f_btn-action" class="btn btn-submit pos-btn-action" value="Finaliser">
+                                    </form>
+                                </div>
+                                {/if}
+                                <br>
+                            </div>
+
                     </div>
                 </div>
 

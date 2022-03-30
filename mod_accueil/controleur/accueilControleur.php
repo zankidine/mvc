@@ -5,18 +5,22 @@
 class AccueilControleur{
 
     private $parametre = [];
-    // Ultérieurement un objet $oModele sera nécessaire
+    private $oModele;
     private $oVue; // Objet
 
     public function __construct($parametre){
 
         $this->parametre = $parametre;
-//        require_once 'mod_accueil/vue/accueilVue.php';
+        $this->oModele = new AccueilModele($this->parametre);
         $this->oVue = new AccueilVue($this->parametre);
     }
 
     public function lister(){
-
-        $this->oVue->genererAffichage();
+        $caGlobal = $this->oModele->getCaGlobal();
+        $nbrClient = $this->oModele->getNbrClient();
+        $moyenne = $this->oModele->getMoyenneParCommande();
+        $listeMeilleurClients = $this->oModele->getMeilleursClient();
+        $listeMeilleursProduits = $this->oModele->getMeilleursProduits();
+        $this->oVue->genererAffichage($caGlobal, $nbrClient, $moyenne,  $listeMeilleurClients, $listeMeilleursProduits);
     }
 }

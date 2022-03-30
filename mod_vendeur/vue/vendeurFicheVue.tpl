@@ -75,10 +75,10 @@
             </div>
         </div>
     </div>
-{*    MESSAGE RETOUR ERREUR *}
-{*    <div {if ClientTable::getMessageErreur() neq '' } class="alert alert-danger" {/if} >*}
-{*        {ClientTable::getMessageErreur()}*}
-{*    </div>*}
+{*    MESSAGE RETOUR ERREUR*}
+    <div {if ClientTable::getMessageErreur() neq '' } class="alert alert-danger" {/if} >
+        {ClientTable::getMessageErreur()}
+    </div>
 
     <div class="content mt-3">
         <div class="animated fadeIn">
@@ -175,7 +175,7 @@
                                                 <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
                                                 <div class="stat-content dib">
                                                     <div class="stat-text">Montant total de mes ventes</div>
-                                                    <div class="stat-digit">{$unVendeur->getCavendeur()} €</div>
+                                                    <div class="stat-digit">{$unVendeur->getCavendeur()|string_format: "%.2f"} €</div>
                                                 </div>
                                             </div>
                                         </div>

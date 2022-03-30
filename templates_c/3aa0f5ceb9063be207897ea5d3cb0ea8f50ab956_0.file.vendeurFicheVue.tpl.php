@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2022-03-23 11:04:44
+/* Smarty version 3.1.34-dev-7, created on 2022-03-29 14:45:38
   from 'C:\laragon\www\mvc\mod_vendeur\vue\vendeurFicheVue.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_623afecc6f2f93_82956707',
+  'unifunc' => 'content_62431b92d45c72_85727349',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3aa0f5ceb9063be207897ea5d3cb0ea8f50ab956' => 
     array (
       0 => 'C:\\laragon\\www\\mvc\\mod_vendeur\\vue\\vendeurFicheVue.tpl',
-      1 => 1648025197,
+      1 => 1648565136,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:public/header.tpl' => 1,
   ),
 ),false)) {
-function content_623afecc6f2f93_82956707 (Smarty_Internal_Template $_smarty_tpl) {
+function content_62431b92d45c72_85727349 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -106,6 +106,10 @@ function content_623afecc6f2f93_82956707 (Smarty_Internal_Template $_smarty_tpl)
                 </div>
             </div>
         </div>
+    </div>
+    <div <?php if (ClientTable::getMessageErreur() != '') {?> class="alert alert-danger" <?php }?> >
+        <?php echo ClientTable::getMessageErreur();?>
+
     </div>
 
     <div class="content mt-3">
@@ -209,7 +213,7 @@ function content_623afecc6f2f93_82956707 (Smarty_Internal_Template $_smarty_tpl)
                                                 <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
                                                 <div class="stat-content dib">
                                                     <div class="stat-text">Montant total de mes ventes</div>
-                                                    <div class="stat-digit"><?php echo $_smarty_tpl->tpl_vars['unVendeur']->value->getCavendeur();?>
+                                                    <div class="stat-digit"><?php echo sprintf("%.2f",$_smarty_tpl->tpl_vars['unVendeur']->value->getCavendeur());?>
  €</div>
                                                 </div>
                                             </div>

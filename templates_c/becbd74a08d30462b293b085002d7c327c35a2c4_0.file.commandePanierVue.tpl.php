@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2022-03-29 14:27:12
-  from 'C:\laragon\www\mvc\mod_commande\vue\commandeListeVue.tpl' */
+/* Smarty version 3.1.34-dev-7, created on 2022-03-29 07:58:02
+  from 'C:\laragon\www\mvc\mod_commande\vue\commandePanierVue.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_624317404a6fc9_88316720',
+  'unifunc' => 'content_6242bc0a40fa38_56814415',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '2906d4cc29b41a7cb2a46de764cf2c4e953c2f73' => 
+    'becbd74a08d30462b293b085002d7c327c35a2c4' => 
     array (
-      0 => 'C:\\laragon\\www\\mvc\\mod_commande\\vue\\commandeListeVue.tpl',
-      1 => 1648564026,
+      0 => 'C:\\laragon\\www\\mvc\\mod_commande\\vue\\commandePanierVue.tpl',
+      1 => 1648540303,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:public/header.tpl' => 1,
   ),
 ),false)) {
-function content_624317404a6fc9_88316720 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6242bc0a40fa38_56814415 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -113,98 +113,103 @@ function content_624317404a6fc9_88316720 (Smarty_Internal_Template $_smarty_tpl)
             <div class="row">
 
                 <div class="col-md-12">
-
                     <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title"><?php echo $_smarty_tpl->tpl_vars['titrePage']->value;?>
-
-
-                                <!-- PLACER LE FORMULAIRE D'AJOUT-->
-                                <form class="pos-ajout" action="index.php" method="post">
-                                    <input type="hidden" name="gestion" value="commande">
-                                    <input type="hidden" name="action" value="form_ajouter">
-                                    <label>Ajouter une commande :
-                                        <input type="image"
-                                               src="public/images/icones/a16.png"
-                                               name="btn_ajouter">
-                                    </label>
-                                </form>
-
-                            </strong>
-                        </div>
                         <div class="card-body">
-                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <table id="" class="table table-striped">
                             <!-- PLACER LA LISTE DES CLIENTS -->
                                 <thead>
                                 <tr>
-                                    <th>Numéro</th>
-                                    <th>Vendeur</th>
-                                    <th>Client</th>
-                                    <th>Montant HT</th>
-                                    <th>Consulter</th>
+                                    <th>N° de ligne</th>
+                                    <th>Référence</th>
+                                    <th>Désignation</th>
+                                    <th>Quantite</th>
+                                    <th>Prix HT</th>
+                                    <th>Prix Vente</th>
+                                    <th>Total</th>
                                     <th>Modifier</th>
+                                    <th>Supprimer</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['listeCommandes']->value, 'commande');
-$_smarty_tpl->tpl_vars['commande']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['commande']->value) {
-$_smarty_tpl->tpl_vars['commande']->do_else = false;
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['listePanier']->value, 'ligne', false, 'index');
+$_smarty_tpl->tpl_vars['ligne']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['index']->value => $_smarty_tpl->tpl_vars['ligne']->value) {
+$_smarty_tpl->tpl_vars['ligne']->do_else = false;
 ?>
                                     <tr>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['index']->value+1;?>
 </td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['commande']->value->getVendeur();?>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['ligne']->value['reference'];?>
 </td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['commande']->value->getClient();?>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['ligne']->value['designation'];?>
 </td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['commande']->value->getTotal_Ht();?>
-</td>
-                                        <td class="pos-actions">
+                                        <td>
                                             <form method="post" action="index.php">
+                                            <input type="number" name="quantite" value="<?php echo $_smarty_tpl->tpl_vars['ligne']->value['quantite'];?>
+" style="width: 80px;">
+                                        </td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['ligne']->value['prix_unitaire_HT'];?>
+</td>
+                                        <td>
+                                            <input type="number" name="prixVente" value="<?php echo $_smarty_tpl->tpl_vars['ligne']->value['prixVente'];?>
+" style="width: 100px;">
+                                        </td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['ligne']->value['quantite']*$_smarty_tpl->tpl_vars['ligne']->value['prixVente'];?>
+</td>
+                                        <td>
+
                                                 <input type="hidden" name="gestion" value="commande">
-                                                <input type="hidden" name="action" value="form_consulter">
-                                                <input type="hidden" name="numero" value="<?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
+                                                <input type="hidden" name="action" value="modifierLigne">
+                                                <input type="hidden" name="reference" value="<?php echo $_smarty_tpl->tpl_vars['ligne']->value['reference'];?>
 ">
                                                 <input type="image"
-                                                       src="public/images/icones/m16.png"
-                                                       name="btn_consulter">
+                                                       src="public/images/icones/p16.png"
+                                                       name="btn_modifier">
                                             </form>
                                         </td>
-                                        <td class="pos-actions">
+                                        <td>
                                             <form method="post" action="index.php">
                                                 <input type="hidden" name="gestion" value="commande">
-                                                <input type="hidden" name="action" value="form_modifier">
-                                                <input type="hidden" name="numero" value="<?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
+                                                <input type="hidden" name="action" value="supprimerLigne">
+                                                <input type="hidden" name="reference" value="<?php echo $_smarty_tpl->tpl_vars['ligne']->value['reference'];?>
 ">
-                                                <?php if ($_smarty_tpl->tpl_vars['commande']->value->getFinaliser() == 1) {?>
-                                                    <p>Validée</p>
-                                                    <?php } elseif ($_smarty_tpl->tpl_vars['commande']->value->getAnnuler() == 1) {?>
-                                                    <p>Annuler</p>
-                                                <?php } else { ?>
-                                                    <input type="image"
-                                                           src="public/images/icones/p16.png"
-                                                           name="btn_modifier">
-                                                <?php }?>
+                                                <input type="image"
+                                                       src="public/images/icones/s16.png"
+                                                       name="btn_supprimer">
+
                                             </form>
-                                        </td>
-                                    </tr>
-                                    <?php
-}
-if ($_smarty_tpl->tpl_vars['commande']->do_else) {
-?>
-                                    <tr>
-                                        <td colspan="7">
-                                            Aucun enregistrement trouvé
                                         </td>
                                     </tr>
                                 <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                                <tr>
+                                    <td colspan="3"> Montant de la commande :<strong> <?php echo sprintf("%.2f",$_smarty_tpl->tpl_vars['analyse']->value[0]['Montant']);?>
+ € </strong></td>
+                                    <td colspan="3"> Total TVA : <strong><?php echo sprintf("%.2f",$_smarty_tpl->tpl_vars['analyse']->value[0]['TVA']);?>
+ € </strong></td>
+                                    <td colspan="3" class="indication"> Marge brute : <strong><?php echo sprintf("%.2f",$_smarty_tpl->tpl_vars['analyse']->value[0]['Marge']);?>
+ € </strong></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
+
+                            <div class="card-body card-block">
+                                <div class="col-md-6"> <a href="index.php?gestion=commande&action=vider_panier"><input type="button" class="btn btn-submit" value="Retour à la commande" onclick=""></a> </div>
+                                <div class="col-md-6 ">
+                                    <form action="index.php" method="POST">
+                                        <input type="hidden" name="gestion" value="commande">
+                                        <input type="hidden" name="action" value="form_ajouter">
+                                        <input type="hidden" name="numero" value="">
+                                        <input type="submit" id="f_btn-action" class="btn btn-submit pos-btn-action" value="Sauvegarder">
+                                    </form>
+
+                                </div>
+                                <br>
+                            </div>
+
                     </div>
                 </div>
 

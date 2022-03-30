@@ -75,11 +75,6 @@
         </div>
     </div>
 
-    {*    MESSAGE RETOUR SUCCES *}
-{*    <div {if ClientTable::getMessageSucces() neq '' } class="alert alert-success" {/if} >*}
-{*        {ClientTable::getMessageSucces()}*}
-{*    </div>*}
-
     <div class="content mt-3">
         <div class="animated fadeIn">
 
@@ -114,7 +109,7 @@
                                     <th>Client</th>
                                     <th>Montant HT</th>
                                     <th>Consulter</th>
-                                    <th>Modifier</th>
+{*                                    <th>Modifier</th>*}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -134,22 +129,16 @@
                                                        name="btn_consulter">
                                             </form>
                                         </td>
-                                        <td class="pos-actions">
-                                            <form method="post" action="index.php">
-                                                <input type="hidden" name="gestion" value="commande">
-                                                <input type="hidden" name="action" value="form_modifier">
-                                                <input type="hidden" name="numero" value="{$commande->getNumero()}">
-                                                {if $commande->getFinaliser() eq 1}
-                                                    <p>Validée</p>
-                                                    {elseif $commande->getAnnuler() eq 1}
-                                                    <p>Annuler</p>
-                                                {else}
-                                                    <input type="image"
-                                                           src="public/images/icones/p16.png"
-                                                           name="btn_modifier">
-                                                {/if}
-                                            </form>
-                                        </td>
+{*                                        <td class="pos-actions">*}
+{*                                            <form method="post" action="index.php">*}
+{*                                                <input type="hidden" name="gestion" value="commande">*}
+{*                                                <input type="hidden" name="action" value="form_modifier">*}
+{*                                                <input type="hidden" name="numero" value="{$commande->getNumero()}">*}
+{*                                                <input type="image"*}
+{*                                                           src="public/images/icones/p16.png"*}
+{*                                                           name="btn_modifier">*}
+{*                                            </form>*}
+{*                                        </td>*}
                                     </tr>
                                     {foreachelse}
                                     <tr>

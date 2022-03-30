@@ -12,12 +12,64 @@ class ProduitTable
     private $supprimer;
     private $autorisationBD = true;
 
+    private $position;
+    private static $messageErreur = "";
+    private static $messageSucces = "";
+
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
     /**
      * @return mixed
      */
     public function getSupprimer()
     {
         return $this->supprimer;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getMessageErreur()
+    {
+        return self::$messageErreur;
+    }
+
+    /**
+     * @param string $messageErreur
+     */
+    public static function setMessageErreur($messageErreur)
+    {
+        self::$messageErreur = self::$messageErreur . $messageErreur;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getMessageSucces()
+    {
+        return self::$messageSucces;
+    }
+
+    /**
+     * @param string $messageSucces
+     */
+    public static function setMessageSucces($messageSucces)
+    {
+        self::$messageSucces = self::$messageSucces . $messageSucces;
     }
 
     /**

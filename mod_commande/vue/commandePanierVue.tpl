@@ -86,81 +86,84 @@
             <div class="row">
 
                 <div class="col-md-12">
-
                     <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title">{$titrePage}
-
-                                <!-- PLACER LE FORMULAIRE D'AJOUT-->
-                                <form class="pos-ajout" action="index.php" method="post">
-                                    <input type="hidden" name="gestion" value="commande">
-                                    <input type="hidden" name="action" value="form_ajouter">
-                                    <label>Ajouter une commande :
-                                        <input type="image"
-                                               src="public/images/icones/a16.png"
-                                               name="btn_ajouter">
-                                    </label>
-                                </form>
-
-                            </strong>
-                        </div>
                         <div class="card-body">
-                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <table id="" class="table table-striped">
                             <!-- PLACER LA LISTE DES CLIENTS -->
                                 <thead>
                                 <tr>
-                                    <th>Numéro</th>
-                                    <th>Vendeur</th>
-                                    <th>Client</th>
-                                    <th>Montant HT</th>
-                                    <th>Consulter</th>
+                                    <th>N° de ligne</th>
+                                    <th>Référence</th>
+                                    <th>Désignation</th>
+                                    <th>Quantite</th>
+                                    <th>Prix HT</th>
+                                    <th>Prix Vente</th>
+                                    <th>Total</th>
                                     <th>Modifier</th>
+                                    <th>Supprimer</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {foreach from=$listeCommandes item=commande}
+                                {foreach from=$listePanier key=index item=ligne}
                                     <tr>
-                                        <td>{$commande->getNumero()}</td>
-                                        <td>{$commande->getVendeur()}</td>
-                                        <td>{$commande->getClient()}</td>
-                                        <td>{$commande->getTotal_Ht()}</td>
-                                        <td class="pos-actions">
+                                        <td>{$index + 1}</td>
+                                        <td>{$ligne.reference}</td>
+                                        <td>{$ligne.designation}</td>
+                                        <td>
                                             <form method="post" action="index.php">
+                                            <input type="number" name="quantite" value="{$ligne.quantite}" style="width: 80px;">
+                                        </td>
+                                        <td>{$ligne.prix_unitaire_HT}</td>
+                                        <td>
+                                            <input type="number" name="prixVente" value="{$ligne.prixVente}" style="width: 100px;">
+                                        </td>
+                                        <td>{$ligne.quantite * $ligne.prixVente}</td>
+                                        <td>
+
                                                 <input type="hidden" name="gestion" value="commande">
-                                                <input type="hidden" name="action" value="form_consulter">
-                                                <input type="hidden" name="numero" value="{$commande->getNumero()}">
+                                                <input type="hidden" name="action" value="modifierLigne">
+                                                <input type="hidden" name="reference" value="{$ligne.reference}">
                                                 <input type="image"
-                                                       src="public/images/icones/m16.png"
-                                                       name="btn_consulter">
+                                                       src="public/images/icones/p16.png"
+                                                       name="btn_modifier">
                                             </form>
                                         </td>
-                                        <td class="pos-actions">
+                                        <td>
                                             <form method="post" action="index.php">
                                                 <input type="hidden" name="gestion" value="commande">
-                                                <input type="hidden" name="action" value="form_modifier">
-                                                <input type="hidden" name="numero" value="{$commande->getNumero()}">
-                                                {if $commande->getFinaliser() eq 1}
-                                                    <p>Validée</p>
-                                                    {elseif $commande->getAnnuler() eq 1}
-                                                    <p>Annuler</p>
-                                                {else}
-                                                    <input type="image"
-                                                           src="public/images/icones/p16.png"
-                                                           name="btn_modifier">
-                                                {/if}
+                                                <input type="hidden" name="action" value="supprimerLigne">
+                                                <input type="hidden" name="reference" value="{$ligne.reference}">
+                                                <input type="image"
+                                                       src="public/images/icones/s16.png"
+                                                       name="btn_supprimer">
+
                                             </form>
-                                        </td>
-                                    </tr>
-                                    {foreachelse}
-                                    <tr>
-                                        <td colspan="7">
-                                            Aucun enregistrement trouvé
                                         </td>
                                     </tr>
                                 {/foreach}
+                                <tr>
+                                    <td colspan="3"> Montant de la commande :<strong> {$analyse[0]['Montant']|string_format: "%.2f"} € </strong></td>
+                                    <td colspan="3"> Total TVA : <strong>{$analyse[0]['TVA']|string_format: "%.2f"} € </strong></td>
+                                    <td colspan="3" class="indication"> Marge brute : <strong>{$analyse[0]['Marge']|string_format: "%.2f"} € </strong></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
+
+                            <div class="card-body card-block">
+                                <div class="col-md-6"> <a href="index.php?gestion=commande&action=vider_panier"><input type="button" class="btn btn-submit" value="Retour à la commande" onclick=""></a> </div>
+                                <div class="col-md-6 ">
+                                    <form action="index.php" method="POST">
+                                        <input type="hidden" name="gestion" value="commande">
+                                        <input type="hidden" name="action" value="form_ajouter">
+                                        <input type="hidden" name="numero" value="">
+                                        <input type="submit" id="f_btn-action" class="btn btn-submit pos-btn-action" value="Sauvegarder">
+                                    </form>
+
+                                </div>
+                                <br>
+                            </div>
+
                     </div>
                 </div>
 

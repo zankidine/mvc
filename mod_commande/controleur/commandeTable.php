@@ -13,6 +13,75 @@ class CommandeTable
     private $client;
     private $finaliser;
     private $listeLigneCommande = [];
+    private $quantitePanier;
+    private $annuler;
+    private static $messageErreur = "";
+    private static $messageSucces = "";
+
+    /**
+     * @return mixed
+     */
+    public function getAnnuler()
+    {
+        return $this->annuler;
+    }
+
+    /**
+     * @param mixed $annuler
+     */
+    public function setAnnuler($annuler): void
+    {
+        $this->annuler = $annuler;
+    }
+
+
+    /**
+     * @return string
+     */
+    public static function getMessageErreur()
+    {
+        return self::$messageErreur;
+    }
+
+    /**
+     * @param string $messageErreur
+     */
+    public static function setMessageErreur($messageErreur)
+    {
+        self::$messageErreur = self::$messageErreur . $messageErreur;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getMessageSucces()
+    {
+        return self::$messageSucces;
+    }
+
+    /**
+     * @param string $messageSucces
+     */
+    public static function setMessageSucces($messageSucces)
+    {
+        self::$messageSucces = self::$messageSucces . $messageSucces;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuantitePanier()
+    {
+        return $this->quantitePanier;
+    }
+
+    /**
+     * @param mixed $quantitePanier
+     */
+    public function setQuantitePanier($quantitePanier)
+    {
+        $this->quantitePanier = $quantitePanier;
+    }
 
     /**
      * @return mixed

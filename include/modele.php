@@ -47,4 +47,8 @@ abstract class Modele {
 		return $this->cnx;
 	}
 
+    protected function dernierID(){
+        return $this->getBD()->lastInsertId();
+    }
+
 }

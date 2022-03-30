@@ -1,4 +1,29 @@
-<!doctype html>
+<?php
+/* Smarty version 3.1.34-dev-7, created on 2022-03-28 09:15:49
+  from 'C:\laragon\www\mvc\mod_commande\vue\commandeNonValideeListeVue.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.34-dev-7',
+  'unifunc' => 'content_62417cc5c5ed76_77409881',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '7970d58af244e0bd7294047735382fc65391cfa3' => 
+    array (
+      0 => 'C:\\laragon\\www\\mvc\\mod_commande\\vue\\commandeNonValideeListeVue.tpl',
+      1 => 1648458497,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:public/left.tpl' => 1,
+    'file:public/header.tpl' => 1,
+  ),
+),false)) {
+function content_62417cc5c5ed76_77409881 (Smarty_Internal_Template $_smarty_tpl) {
+?><!doctype html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>
@@ -10,8 +35,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{$titreVue}</title>
-    <meta name="description" content="{$titreVue}">
+    <title><?php echo $_smarty_tpl->tpl_vars['titreVue']->value;?>
+</title>
+    <meta name="description" content="<?php echo $_smarty_tpl->tpl_vars['titreVue']->value;?>
+">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -30,7 +57,9 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <!-- <?php echo '<script'; ?>
+ type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"><?php echo '</script'; ?>
+> -->
 
 </head>
 <body>
@@ -39,7 +68,8 @@
 <!-- Left Panel -->
 
 
-{include file='public/left.tpl'}
+<?php $_smarty_tpl->_subTemplateRender('file:public/left.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 
 <!-- FIN : Left Panel -->
 
@@ -50,7 +80,8 @@
 
     <!--Header -->
 
-    {include file='public/header.tpl'}
+    <?php $_smarty_tpl->_subTemplateRender('file:public/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 
     <!-- FIN : header -->
 
@@ -75,11 +106,7 @@
         </div>
     </div>
 
-    {*    MESSAGE RETOUR SUCCES *}
-{*    <div {if ClientTable::getMessageSucces() neq '' } class="alert alert-success" {/if} >*}
-{*        {ClientTable::getMessageSucces()}*}
-{*    </div>*}
-
+    
     <div class="content mt-3">
         <div class="animated fadeIn">
 
@@ -89,7 +116,8 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">{$titrePage}
+                            <strong class="card-title"><?php echo $_smarty_tpl->tpl_vars['titrePage']->value;?>
+
 
                                 <!-- PLACER LE FORMULAIRE D'AJOUT-->
                                 <form class="pos-ajout" action="index.php" method="post">
@@ -118,17 +146,27 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {foreach from=$listeCommandes item=commande}
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['listeCommandes']->value, 'commande');
+$_smarty_tpl->tpl_vars['commande']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['commande']->value) {
+$_smarty_tpl->tpl_vars['commande']->do_else = false;
+?>
                                     <tr>
-                                        <td>{$commande->getNumero()}</td>
-                                        <td>{$commande->getVendeur()}</td>
-                                        <td>{$commande->getClient()}</td>
-                                        <td>{$commande->getTotal_Ht()}</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['commande']->value->getVendeur();?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['commande']->value->getClient();?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['commande']->value->getTotal_Ht();?>
+</td>
                                         <td class="pos-actions">
                                             <form method="post" action="index.php">
                                                 <input type="hidden" name="gestion" value="commande">
                                                 <input type="hidden" name="action" value="form_consulter">
-                                                <input type="hidden" name="numero" value="{$commande->getNumero()}">
+                                                <input type="hidden" name="numero" value="<?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
+">
                                                 <input type="image"
                                                        src="public/images/icones/m16.png"
                                                        name="btn_consulter">
@@ -138,26 +176,26 @@
                                             <form method="post" action="index.php">
                                                 <input type="hidden" name="gestion" value="commande">
                                                 <input type="hidden" name="action" value="form_modifier">
-                                                <input type="hidden" name="numero" value="{$commande->getNumero()}">
-                                                {if $commande->getFinaliser() eq 1}
-                                                    <p>Validée</p>
-                                                    {elseif $commande->getAnnuler() eq 1}
-                                                    <p>Annuler</p>
-                                                {else}
-                                                    <input type="image"
+                                                <input type="hidden" name="numero" value="<?php echo $_smarty_tpl->tpl_vars['commande']->value->getNumero();?>
+">
+                                                <input type="image"
                                                            src="public/images/icones/p16.png"
                                                            name="btn_modifier">
-                                                {/if}
                                             </form>
                                         </td>
                                     </tr>
-                                    {foreachelse}
+                                    <?php
+}
+if ($_smarty_tpl->tpl_vars['commande']->do_else) {
+?>
                                     <tr>
                                         <td colspan="7">
                                             Aucun enregistrement trouvé
                                         </td>
                                     </tr>
-                                {/foreach}
+                                <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                 </tbody>
                             </table>
                         </div>
@@ -172,30 +210,64 @@
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
-    <script src="public/assets/js/vendor/jquery-2.1.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    <script src="public/assets/js/plugins.js"></script>
-    <script src="public/assets/js/main.js"></script>
+    <?php echo '<script'; ?>
+ src="public/assets/js/vendor/jquery-2.1.4.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/plugins.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/main.js"><?php echo '</script'; ?>
+>
 
 
-    <script src="public/assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="public/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-    <script src="public/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="public/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-    <script src="public/assets/js/lib/data-table/jszip.min.js"></script>
-    <script src="public/assets/js/lib/data-table/pdfmake.min.js"></script>
-    <script src="public/assets/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="public/assets/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="public/assets/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="public/assets/js/lib/data-table/buttons.colVis.min.js"></script>
-    <script src="public/assets/js/lib/data-table/datatables-init.js"></script>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/datatables.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/dataTables.bootstrap.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/dataTables.buttons.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/buttons.bootstrap.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/jszip.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/pdfmake.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/vfs_fonts.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/buttons.html5.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/buttons.print.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/buttons.colVis.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/assets/js/lib/data-table/datatables-init.js"><?php echo '</script'; ?>
+>
 
 
-    <script type="text/javascript">
+    <?php echo '<script'; ?>
+ type="text/javascript">
         $(document).ready(function () {
             $('#bootstrap-data-table-export').DataTable();
         });
-    </script>
+    <?php echo '</script'; ?>
+>
 
 </body>
 </html>
+<?php }
+}

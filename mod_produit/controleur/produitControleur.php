@@ -25,7 +25,7 @@ class ProduitControleur
     public function form_consulter()
     {
         $unProduit = $this->oModele->getUnProduit();
-        //$this->oModele->positionVente();
+        $unProduit->setPosition($this->oModele->positionVente());
         $this->oVue->genererAffichageFiche($unProduit);
     }
 

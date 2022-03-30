@@ -71,9 +71,11 @@ class ProduitModele extends Modele
             $produit->getPoids_Piece(),
         ]);
 
-//        if($idRequete){
-//            ClientTable::setMessageSucces("Client correctement enregistré. <br>");
-//        }
+        if($idRequete){
+            ProduitTable::setMessageSucces("Produit correctement enregistrer. <br>");
+        } else {
+            ProduitTable::setMessageErreur("Le produit n'a pas été enregistrer");
+        }
     }
 
     public function updateProduit(ProduitTable $produit){
@@ -90,9 +92,11 @@ class ProduitModele extends Modele
             $produit->getReference()
         ]);
 
-//        if($idRequete){
-//            ClientTable::setMessageSucces("Client correctement modifier. <br>");
-//        }
+        if($idRequete){
+            ProduitTable::setMessageSucces("Produit correctement modifier. <br>");
+        } else {
+            ProduitTable::setMessageErreur("Le produit n'a pas été modifier. <br>");
+        }
     }
 
     public function supprimer()
@@ -101,6 +105,11 @@ class ProduitModele extends Modele
         $sql = "UPDATE produit SET supprimer = 1 WHERE reference= ?";
 
         $idRequete = $this->executeRequete($sql, array($this->parametre['reference']));
+        if($idRequete){
+            ProduitTable::setMessageSucces("Produit correctement supprimer. <br>");
+        } else {
+            ProduitTable::setMessageErreur("Le produit n'a pas été supprimer. <br>");
+        }
     }
 
     public function activer()
@@ -108,6 +117,11 @@ class ProduitModele extends Modele
         $sql = "UPDATE produit SET supprimer = 0 WHERE reference= ?";
 
         $idRequete = $this->executeRequete($sql, array($this->parametre['reference']));
+        if($idRequete){
+            ProduitTable::setMessageSucces("Produit correctement activer. <br>");
+        } else {
+            ProduitTable::setMessageErreur("Le produit n'a pas été activer. <br>");
+        }
     }
 
     public function delete()
@@ -119,13 +133,40 @@ class ProduitModele extends Modele
 
     public function positionVente()
     {
-        $sql = "SELECT produit.reference, COUNT(ligne_commande.reference) 'Vente' FROM ligne_commande, produit WHERE produit.reference = ligne_commande.reference GROUP BY ligne_commande.reference ORDER BY COUNT(ligne_commande.reference) DESC";
-
+        // Tableau des produits [référence -> nbrVente] trié par DESC
+        $sql = "SELECT produit.reference, COUNT(ligne_commande.reference) 'NbrVente' FROM produit 
+                LEFT JOIN ligne_commande ON produit.reference = ligne_commande.reference 
+                GROUP BY produit.reference ORDER BY COUNT(ligne_commande.reference) DESC";
         $idRequete = $this->executeRequete($sql);
-        //$idRequete->fetchAll(PDO::FETCH_ASSOC)[0]['Vente'];
-//        echo '<pre>';
-//            var_dump($idRequete->fetchAll(PDO::FETCH_ASSOC));
-//        echo "</pre>";
+        // Initialiser la position à 1
+        $position = 1;
+        $reference  = $this->parametre['reference'];
+        // Parcourir le tableau à la recherche de la référence recherché
+        //var_dump($idRequete->fetch(PDO::FETCH_ASSOC)['NbrVente']);
+        while ($row = $idRequete->fetch(PDO::FETCH_ASSOC))
+        {
+
+            if ($position > 1)
+            {
+                if ($row['NbrVente'] ===  $nbrVentePrecedent)
+                {
+                    $position--;
+                }
+            }
+
+            //Si référence = référence recherché retourn la position
+            if ($row['reference'] === $reference)
+            {
+                return $position;
+                exit();
+            }
+
+            $nbrVentePrecedent = $row['NbrVente'];
+            $position++;
+        }
+
+        // Si référence = référence recherché retourn la position
+        // Si référence != référence recherché on stock la valeur pour comparaison avec référence recherché
 
     }
 }

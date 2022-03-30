@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2022-03-22 15:28:30
+/* Smarty version 3.1.34-dev-7, created on 2022-03-29 13:06:20
   from 'C:\laragon\www\mvc\mod_produit\vue\produitFicheVue.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_6239eb1e9eae85_80262639',
+  'unifunc' => 'content_6243044cbd5c49_13010642',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dc7cc44c09819d05d0a19124af93fd0a440d8b84' => 
     array (
       0 => 'C:\\laragon\\www\\mvc\\mod_produit\\vue\\produitFicheVue.tpl',
-      1 => 1647962907,
+      1 => 1648559172,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:public/header.tpl' => 1,
   ),
 ),false)) {
-function content_6239eb1e9eae85_80262639 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6243044cbd5c49_13010642 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\laragon\\www\\mvc\\include\\libs\\plugins\\modifier.capitalize.php','function'=>'smarty_modifier_capitalize',),));
 ?>
 <!doctype html>
@@ -213,7 +213,11 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\laragon\\www\\mvc\\inclu
                                         <div class="stat-widget-one">
                                             <div class="stat-content dib">
                                                 <div class="stat-text">Prix au Kilogramme</div>
-                                                <div class="stat-digit">36 €</div>
+                                                <div class="stat-digit"><?php if ($_smarty_tpl->tpl_vars['unProduit']->value->getDescriptif() == 'G') {
+echo $_smarty_tpl->tpl_vars['unProduit']->value->getPrix_Unitaire_HT()/($_smarty_tpl->tpl_vars['unProduit']->value->getQuantite()/1000);
+} elseif ($_smarty_tpl->tpl_vars['unProduit']->value->getDescriptif() == 'P') {
+echo $_smarty_tpl->tpl_vars['unProduit']->value->getPrix_Unitaire_HT()/(($_smarty_tpl->tpl_vars['unProduit']->value->getPoids_Piece()*$_smarty_tpl->tpl_vars['unProduit']->value->getQuantite())/1000);
+}?>€</div>
                                             </div>
                                         </div>
                                     </div>
@@ -225,7 +229,9 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\laragon\\www\\mvc\\inclu
                                         <div class="stat-widget-one">
                                             <div class="stat-content dib">
                                                 <div class="stat-text mb-1">Classement</div>
-                                                <div class="stat-text">L'article DESIGNATION est classé en 1ère position parmis les meilleurs ventes.</div>
+                                                <div class="stat-text">L'article <?php echo $_smarty_tpl->tpl_vars['unProduit']->value->getDesignation();?>
+ est classé en <?php echo $_smarty_tpl->tpl_vars['unProduit']->value->getPosition();?>
+ <?php if ($_smarty_tpl->tpl_vars['unProduit']->value->getPosition() > 1) {?>éme <?php } else { ?> ére<?php }?> position parmis les meilleurs ventes.</div>
                                             </div>
                                         </div>
                                     </div>
